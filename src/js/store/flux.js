@@ -42,33 +42,34 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       loadSomeData: () => {
         /**
-					  fetch().then().then(data => setStore({ "foo": data.bar }))
-				  */
+					fetch().then().then(data => setStore({ "foo": data.bar }))
+				*/
         const store = getStore();
 
         fetch("https://swapi.info/api/people")
-        .then((response) => response.json())
-        .then((data) => {
-          setStore((prevState) => ({ ...prevState, characters: data.results }));
-          console.log(store.characters);
-        })
-        .catch((error) => console.error(error));
-      
-      fetch("https://swapi.info/api/planets")
-        .then((response) => response.json())
-        .then((data) => {
-          setStore((prevState) => ({ ...prevState, planets: data.results }));
-          console.log(store.planets);
-        })
-        .catch((error) => console.error(error));
-      
-      fetch("https://swapi.info/api/vehicles")
-        .then((response) => response.json())
-        .then((data) => {
-          setStore((prevState) => ({ ...prevState, vehicles: data.results }));
-          console.log(store.vehicles);
-        })
-        .catch((error) => console.error(error)); // Log the API error (if any) to your console
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({ characters: data });
+            console.log(store.characters);
+          })
+          // Log the JSON response to your console
+          .catch((error) => console.error(error)); // Log the API error (if any) to your console
+
+        fetch("https://swapi.info/api/planets")
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({ planets: data });
+            console.log(store.planets);
+          })
+          .catch((error) => console.error(error)); // Log the API error (if any) to your console
+
+        fetch("https://swapi.info/api/vehicles")
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({ vehicles: data });
+            console.log(store.vehicles);
+          })
+          .catch((error) => console.error(error)); // Log the API error (if any) to your console
       },
       ////////////////////////////  ADD FAVORITES  ////////////////////////////
 
@@ -213,12 +214,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((error) => console.error(error));
       },
-      loadSomeData: () => {
-        /**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-        console.log("cargando !");
-      },
+      
       getProducts: () => {
         const store = getStore();
         console.log("cargando contactos");

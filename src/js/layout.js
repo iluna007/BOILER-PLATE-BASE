@@ -7,7 +7,7 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
-import { Navbar1 } from "./component/navbar1";
+import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { CharactersDetail } from "./views/learnmoreCharacter";
 import { PlanetsDetail } from "./views/learnmorePlanet";
@@ -24,13 +24,8 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          <Navbar1 />
+          <Navbar />
           <Routes>
-            ///////////////////////////////////////////////////////////////
-            <Route path="/carteras" element={<Carteras />} />
-            <Route path="/newproduct" element={<Newproduct />} />
-            <Route path="/products" element={<Products />} />
-            ///////////////////////////////////////////////////////////////
             <Route path="/" element={<Home />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/single/:theid" element={<Single />} />
@@ -43,6 +38,9 @@ const Layout = () => {
               element={<PlanetsDetail />}
             />
             <Route path="*" element={<h1>Not found!</h1>} />
+            <Route path="/carteras" element={<Carteras />} />
+            <Route path="/newproduct" element={<Newproduct />} />
+            <Route path="/products" element={<Products />} />
           </Routes>
           <Footer />
         </ScrollToTop>
