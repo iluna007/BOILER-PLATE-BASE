@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      contacts: [
+      products: [
         {
           name: "Pedro",
           phone: "8486851515",
@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       titulo: [],
       agendaname: [],
       agendas: [],
-      editedcontact: [],
+      editedproduct: [],
     },
 
     actions: {
@@ -47,29 +47,28 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
 
         fetch("https://swapi.info/api/people")
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({ characters: data });
-            console.log(store.characters);
-          })
-          // Log the JSON response to your console
-          .catch((error) => console.error(error)); // Log the API error (if any) to your console
-
-        fetch("https://swapi.info/api/planets")
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({ planets: data });
-            console.log(store.planets);
-          })
-          .catch((error) => console.error(error)); // Log the API error (if any) to your console
-
-        fetch("https://swapi.info/api/vehicles")
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({ vehicles: data });
-            console.log(store.vehicles);
-          })
-          .catch((error) => console.error(error)); // Log the API error (if any) to your console
+        .then((response) => response.json())
+        .then((data) => {
+          setStore((prevState) => ({ ...prevState, characters: data.results }));
+          console.log(store.characters);
+        })
+        .catch((error) => console.error(error));
+      
+      fetch("https://swapi.info/api/planets")
+        .then((response) => response.json())
+        .then((data) => {
+          setStore((prevState) => ({ ...prevState, planets: data.results }));
+          console.log(store.planets);
+        })
+        .catch((error) => console.error(error));
+      
+      fetch("https://swapi.info/api/vehicles")
+        .then((response) => response.json())
+        .then((data) => {
+          setStore((prevState) => ({ ...prevState, vehicles: data.results }));
+          console.log(store.vehicles);
+        })
+        .catch((error) => console.error(error)); // Log the API error (if any) to your console
       },
       ////////////////////////////  ADD FAVORITES  ////////////////////////////
 
@@ -117,35 +116,38 @@ const getState = ({ getStore, getActions, setStore }) => {
       ////////////////////////////  CREACION DE OBJETOS NUEVOS  ////////////////////////////
 
       printText: () => {},
-      eliminar: (editedContact) => {
+      eliminar: (editedproduct) => {
         const store = getStore();
         const requestOptions = {
           method: "DELETE",
-          redirect: "follow"
+          redirect: "follow",
         };
-        
-        fetch(`https://playground.4geeks.com/contact/agendas/${store.titulo}/contacts/${editedContact.id}`, requestOptions)
+
+        fetch(
+          `https://playground.4geeks.com/contact/agendas/${store.titulo}/contacts/${editedproduct.id}`,
+          requestOptions
+        )
           .then((response) => response.text())
           .then((result) => {
             console.log(result);
-            getActions().getContacts();
-      })
+            getActions().getProducts();
+          })
           .catch((error) => console.error(error));
       },
-      putedit: (editedcontact) => {
+      putedit: (editedproduct) => {
         const store = getStore();
         console.log("editando");
-        setStore({ editedcontact: store.contacts });
-        console.log("data:", editedcontact);
+        setStore({ editedproduct: store.products });
+        console.log("data:", editedproduct);
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         const raw = JSON.stringify({
-          name: editedcontact.name,
-          phone: editedcontact.phone,
-          email: editedcontact.email,
-          address: editedcontact.address,
+          name: editedproduct.name,
+          phone: editedproduct.phone,
+          email: editedproduct.email,
+          address: editedproduct.address,
           id: 33,
         });
 
@@ -157,13 +159,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         fetch(
-          `https://playground.4geeks.com/contact/agendas/${store.titulo}/contacts/${editedcontact.id}`,
+          `https://playground.4geeks.com/contact/agendas/${store.titulo}/contacts/${editedproduct.id}`,
           requestOptions
         )
           .then((response) => response.text())
           .then((result) => {
             console.log(result);
-            getActions().getContacts();
+            getActions().getProducts();
           })
           .catch((error) => console.error(error));
       },
@@ -217,7 +219,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				*/
         console.log("cargando !");
       },
-      getContacts: () => {
+      getProducts: () => {
         const store = getStore();
         console.log("cargando contactos");
         const requestOptions = {
@@ -232,7 +234,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            setStore({ contacts: result.contacts });
+            setStore({ products: result.contacts });
           })
           .catch((error) => console.error(error));
       },
@@ -264,7 +266,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((error) => console.error(error));
       },
-      postContact: (titulo, data) => {
+      postProduct: (titulo, data) => {
         console.log("agenda name:", titulo);
         console.log("data", data);
         const myHeaders = new Headers();

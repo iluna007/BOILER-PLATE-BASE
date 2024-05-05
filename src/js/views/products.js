@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/demo.css";
-import { act } from "react-dom/test-utils";
 
-export const Contacts = () => {
+export const Products = () => {
   const { store, actions } = useContext(Context);
-  const [currentContact, setCurrentContact] = useState(
+  const [currentproduct, setCurrentproduct] = useState(
     {
       name: "",
       phone: "",
@@ -16,33 +15,33 @@ export const Contacts = () => {
     },
   );
 
-  const saveEditedContact = () => {
-    actions.putedit(currentContact);
+  const saveEditedproduct = () => {
+    actions.putedit(currentproduct);
   };
-  const deletedContact = () => {
-    actions.eliminar(currentContact);
+  const deletedproduct = () => {
+    actions.eliminar(currentproduct);
   };
   const info = (e) => {
-    setCurrentContact({
-      ...currentContact,
+    setCurrentproduct({
+      ...currentproduct,
       [e.target.name]: e.target.value,
     });
   };
 
   useEffect(() => {
     console.log("useEffect se activo")
-    actions.getContacts();
+    actions.getProducts();
   },[])
 
 
-  console.log(currentContact)
+  console.log(currentproduct)
 
 
   
   return (
     <div className="container">
       <ul className="list-group">
-        {store.contacts.map((item, index) => {
+        {store.products.map((item, index) => {
           return (
             <li key={index} className="d-flex mb-3 border">
               <div className="p-2">
@@ -105,7 +104,7 @@ export const Contacts = () => {
                   className="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
-                  onClick={() => setCurrentContact(item)}
+                  onClick={() => setCurrentproduct(item)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +134,7 @@ export const Contacts = () => {
                           className="modal-title fs-5"
                           id="staticBackdropLabel"
                         >
-                          Are you sure do you want to edit this contact?
+                          Are you sure do you want to edit this product?
                         </h1>
                         <button
                           type="button"
@@ -172,7 +171,7 @@ export const Contacts = () => {
                                 className="form-control"
                                 id="exampleInputAgendaId"
                                 key={index}
-                                value={currentContact.id}
+                                value={currentproduct.id}
                                 placeholder={info}
                                 name="id"
                               />
@@ -190,7 +189,7 @@ export const Contacts = () => {
                                 className="form-control"
                                 id="exampleInputFullName"
                                 key={index}
-                                value={currentContact.name}
+                                value={currentproduct.name}
                                 onChange={info}
                                 name="name"
                               />
@@ -208,7 +207,7 @@ export const Contacts = () => {
                                 id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
                                 key={index}
-                                value={currentContact.email}
+                                value={currentproduct.email}
                                 onChange={info}
                                 name="email"
                               />
@@ -225,7 +224,7 @@ export const Contacts = () => {
                                 className="form-control"
                                 id="exampleInputAdress"
                                 key={index}
-                                value={currentContact.address}
+                                value={currentproduct.address}
                                 onChange={info}
                                 name="address"
                               />
@@ -242,7 +241,7 @@ export const Contacts = () => {
                                 className="form-control"
                                 id="exampleInputPhone1"
                                 key={index}
-                                value={currentContact.phone}
+                                value={currentproduct.phone}
                                 onChange={info}
                                 name="phone"
                               />
@@ -265,7 +264,7 @@ export const Contacts = () => {
                           className="btn btn-warning"
                           data-bs-dismiss="modal"
                           onClick={() => {
-                            saveEditedContact();                      
+                            saveEditedproduct();                      
                           }}
                         >
                           Yes, edit it
@@ -280,7 +279,7 @@ export const Contacts = () => {
                   className="btn"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop2"
-                  onClick={() => setCurrentContact(item)}
+                  onClick={() => setCurrentproduct(item)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +309,7 @@ export const Contacts = () => {
                           className="modal-title fs-5"
                           id="staticBackdropLabel2"
                         >
-                          Are you sure do you want to erase this contact?
+                          Are you sure do you want to erase this product?
                         </h1>
                         <button
                           type="button"
@@ -321,7 +320,7 @@ export const Contacts = () => {
                       </div>
                       <div className="modal-body">
                         <p>
-                          Once you erase this contact, you will not be able to
+                          Once you erase this product, you will not be able to
                           recover it.
                         </p>
                       </div>
@@ -338,7 +337,7 @@ export const Contacts = () => {
                           className="btn btn-danger"
                           data-bs-dismiss="modal"
                           onClick={() => {
-                            deletedContact();                      
+                            deletedproduct();                      
                           }}
                         >
                           Yes, erase it

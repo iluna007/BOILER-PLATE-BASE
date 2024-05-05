@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { Home1 } from "./views/home1";
+import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
@@ -12,9 +12,9 @@ import { Footer } from "./component/footer";
 import { CharactersDetail } from "./views/learnmoreCharacter";
 import { PlanetsDetail } from "./views/learnmorePlanet";
 ///////////////////////////////////////////////////////////////
-import { Home } from "./views/home";
-import { Contacts } from "./views/contacts";
-import { Newcontact } from "./views/newcontact";
+import { Carteras } from "./views/carteras";
+import { Products } from "./views/products";
+import { Newproduct } from "./views/newproduct";
 
 //create your first component
 const Layout = () => {
@@ -27,11 +27,11 @@ const Layout = () => {
           <Navbar1 />
           <Routes>
             ///////////////////////////////////////////////////////////////
-            <Route path="/" element={<Home />} />
-            <Route path="/newcontact" element={<Newcontact />} />
-            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/carteras" element={<Carteras />} />
+            <Route path="/newproduct" element={<Newproduct />} />
+            <Route path="/products" element={<Products />} />
             ///////////////////////////////////////////////////////////////
-            <Route path="/home1" element={<Home1 />} />
+            <Route path="/" element={<Home />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/single/:theid" element={<Single />} />
             <Route

@@ -3,7 +3,7 @@ import rigoImage from "../../img/rigo-baby.jpg";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-import "../../styles/home1.css";
+import "../../styles/home.css";
 
 export const Cardprueba = (props) => {
   const { store, actions } = useContext(Context);

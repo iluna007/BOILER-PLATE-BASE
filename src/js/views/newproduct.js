@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "../../styles/home1.css";
+import "../../styles/home.css";
 
-export const Newcontact = () => {
+export const Newproduct = () => {
   const { store, actions } = useContext(Context);
   const [data, setData] = useState({
     name: "",
@@ -13,9 +13,9 @@ export const Newcontact = () => {
     id: "",
   });
 
-  const saveContact = (e) => {
+  const saveProduct = (e) => {
     e.preventDefault();
-    actions.postContact(store.titulo, data);
+    actions.postProduct(store.titulo, data);
   };
   console.log(store.titulo);
   const info = (e) => {
@@ -31,7 +31,7 @@ export const Newcontact = () => {
         <form>
           <div className="mb-3">
             <label for="exampleInputAgendaName" className="form-label">
-              Agenda Name
+              Nombre de cartera
             </label>
             <input
               type="agendaname"
@@ -44,7 +44,7 @@ export const Newcontact = () => {
 
           <div className="mb-3">
             <label for="exampleInputFullName" className="form-label">
-              Full name
+              Nombre de producto
             </label>
             <input
               type="fullname"
@@ -57,7 +57,7 @@ export const Newcontact = () => {
           </div>
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">
-              Email email
+              Precio
             </label>
             <input
               type="email"
@@ -71,7 +71,7 @@ export const Newcontact = () => {
           </div>
           <div className="mb-3">
             <label for="exampleInputAdress" className="form-label">
-              Address
+              Dimensiones
             </label>
             <input
               type="adress"
@@ -84,7 +84,7 @@ export const Newcontact = () => {
           </div>
           <div className="mb-3">
             <label for="exampleInputPhone1" className="form-label">
-              Phone
+              Tiempo de entrega
             </label>
             <input
               type="phone"
@@ -97,14 +97,14 @@ export const Newcontact = () => {
           </div>
           <div className="container text-center row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div className="col">
-              <button onClick={saveContact} className="btn btn-outline-success">
+              <button onClick={saveProduct} className="btn btn-outline-success">
                 save
               </button>
             </div>
             <div className="col">
               <Link to="/contacts">
                 <button className="btn btn-link">
-                  or get back to contacts
+                  o regresa a producto
                 </button>
               </Link>
             </div>

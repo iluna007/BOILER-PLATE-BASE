@@ -26,9 +26,9 @@ export const Single = (props) => {
       )}
       <Cardextensa />
 
-      <Link to="/hom1">
+      <Link to="/home">
         <span className="btn btn-primary btn-lg" href="#" role="button">
-          Back home1
+          Back home
         </span>
       </Link>
     </div>

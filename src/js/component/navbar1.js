@@ -10,8 +10,8 @@ export const Navbar1 = () => {
     <>
       <nav className="navbar navbar-light bg-light mb-3">
         <div className="container">
-          <Link to="/home1">
-            <button className="btn btn-outline-secondary">Home1</button>
+          <Link to="/" className="btn btn-outline-secondary">
+            Home
           </Link>
 
           <div className="p-3 mb-2 bg-dark-subtle text-dark-emphasis">
@@ -28,9 +28,6 @@ export const Navbar1 = () => {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#"></a>
-                </li>
                 {store.charactersLiked.length === 0 ? (
                   <li>
                     <p>Empty</p>
@@ -38,15 +35,13 @@ export const Navbar1 = () => {
                 ) : (
                   store.charactersLiked.map((elemento, index) => (
                     <li key={index}>
-                      <a className="dropdown-item" href="#">
-                        <div className="d-flex justify-content-between m-2 ">
-                          <p>{elemento}</p>
-                          <i
-                            onClick={() => actions.deleteFavorite(elemento)}
-                            className="bi bi-trash3-fill"
-                          ></i>
-                        </div>
-                      </a>
+                      <div className="dropdown-item d-flex justify-content-between m-2 ">
+                        <p>{elemento}</p>
+                        <i
+                          onClick={() => actions.deleteFavorite(elemento)}
+                          className="bi bi-trash3-fill"
+                        ></i>
+                      </div>
                     </li>
                   ))
                 )}
@@ -60,21 +55,21 @@ export const Navbar1 = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="navbar-brand" href="#">
+                <Link className="navbar-brand" to="#">
                   Vendedor
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <Link
                   className="nav-link dropdown-toggle"
-                  href="#"
+                  to="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   onClick={actions.getAgendas}
                 >
                   Carteras de disponibles
-                </a>
+                </Link>
                 <ul className="dropdown-menu">
                   {store.agendas.map((item, index) => {
                     return (
@@ -82,39 +77,33 @@ export const Navbar1 = () => {
                         key={index}
                         className="list-group-item d-flex justify-content-between"
                       >
-                        <a className="dropdown-item" href="#">
+                        <Link className="dropdown-item" to="#">
                           {item.slug}
-                        </a>
+                        </Link>
                       </li>
                     );
                   })}
                 </ul>
               </li>
               <li className="nav-item">
-                <Link to="/">
-                  <a className="nav-link active" aria-current="page" href="#">
-                    Agregar/Eliminar Carteras
-                  </a>
+                <Link to="/carteras" className="nav-link active" aria-current="page">
+                  Agregar/Eliminar Carteras
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/newcontact">
-                  <a className="nav-link" href="#">
-                    Agregar Productos
-                  </a>
+                <Link to="/newproduct" className="nav-link">
+                  Agregar Productos
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/contacts">
-                  <a className="nav-link" href="#">
-                    Productos
-                  </a>
+                <Link to="/products" className="nav-link">
+                  Productos
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">
+                <Link className="nav-link disabled" aria-disabled="true" to="#">
                   Cartera: <strong>{store.titulo}</strong>
-                </a>
+                </Link>
               </li>
             </ul>
             <form className="d-flex" role="search">
