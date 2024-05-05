@@ -1,51 +1,58 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 
-import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
-import CharacterCard from "../component/charactercard";
-import PlanetCard from "../component/planetscard";
-
 export const Home = () => {
-  const [characters, setCharacters] = useState([]);
   const { store, actions } = useContext(Context);
+  const [newuser, setNewUser] = useState("");
+  const [user, setUser] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    actions.createAgenda(newuser);
+  };
+  const handleDelete = (event) => {
+    event.preventDefault();
+    actions.deleteAgenda(user);
+  };
 
   return (
-    <div className="container text-center mt-5">
-      <h1>Characters</h1>
-
-      <div className="row flex-row flex-nowrap " style={{ overflowX: "auto" }}>
-        {store.characters.map((character) => (
-          <CharacterCard
-            uid={character.url
-              .replace("https://swapi.info/api/people/", "")
-              .replace("/ ", "")}
-            key={character.url}
-            name={character.name}
-            hairColor={character.hair_color}
-            gender={character.gender}
-            eye_color={character.eye_color}
-          />
-        ))}
+    <div className="text-center mt-5">
+      <h1>Please submit a new agenda name:</h1>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
+              type="fullname"
+              className="form-control"
+              id="newAgenda"
+              value={newuser}
+              onChange={(e) => setNewUser(e.target.value)}
+            />
+            <button
+              className="btn btn-outline-success"
+              onClick={() => actions.createAgenda}
+            >Add
+            </button>
+          </div>
+          <h1>Or delete it:</h1>
+        </form>
+        <form onSubmit={handleDelete}>
+          <div className="mb-3">
+            <input
+              type="fullname"
+              className="form-control"
+              id="newAgenda"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <button
+                  className="btn btn-outline-danger"
+                  onClick={() => actions.deleteAgenda}
+                >Delete
+            </button>            
+          </div>
+        </form>
       </div>
-
-      <h1>Planets</h1>
-
-      <div className="row flex-row flex-nowrap " style={{ overflowX: "auto" }}>
-        {store.planets.map((planet) => (
-          <PlanetCard
-            uid={planet.url
-              .replace("https://swapi.info/api/planets/", "")
-              .replace("/ ", "")}
-            key={planet.url}
-            name={planet.name}
-            population={planet.population}
-            terrain={planet.terrain}
-          />
-        ))}
-      </div>
-
-      <h1>Vehicles</h1>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
 
 
-import "../../styles/home.css";
+import "../../styles/home1.css";
 
 export const Cardextensa = () => {
   const { store } = useContext(Context);
